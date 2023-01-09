@@ -1,4 +1,5 @@
 import "./App.css";
+import { db } from "./database.config";
 
 function App() {
   return (

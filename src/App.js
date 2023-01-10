@@ -8,12 +8,15 @@ import {
   collection,
   getDoc,
   getDocs,
+  updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 
 function App() {
   const [titulo, setTitulo] = useState();
   const [autor, setAutor] = useState();
   const [busca, setBusca] = useState([]);
+  const [idPost, setIdPost] = useState();
 
   async function handleAdd() {
     // await setDoc(doc(db, "posts", "12345"), {
@@ -55,7 +58,6 @@ function App() {
     // .catch(() => {
     //   console.log("ERRO AO BUSCAR");
     // });
-
     const postRef = collection(db, "posts");
     await getDocs(postRef)
       .then((snapshot) => {
@@ -75,12 +77,63 @@ function App() {
       });
   }
 
+  async function handleUpdate() {
+    const docRef = doc(db, "posts", idPost);
+    await updateDoc(docRef, {
+      titulo: titulo,
+      autor: autor,
+    })
+      .then(() => {
+        alert("atualizado");
+        setIdPost("");
+        setAutor("");
+        setTitulo("");
+      })
+      .catch((error) => alert("Erro! Campo invalido ou incorreto"));
+  }
+  async function handleUpdate() {
+    const docRef = doc(db, "posts", idPost);
+    await updateDoc(docRef, {
+      titulo: titulo,
+      autor: autor,
+    })
+      .then(() => {
+        alert("atualizado");
+        setIdPost("");
+        setAutor("");
+        setTitulo("");
+      })
+      .catch((error) => alert("Erro! Campo invalido ou incorreto"));
+  }
+
+  async function handleDelete(id) {
+    const docRef = doc(db, "posts", id);
+    await deleteDoc(docRef)
+      .then(() => {
+        alert("Post deletado com sucesso");
+      })
+      .catch((err) => alert("Deu erro" + err));
+  }
+
   return (
     <div className="App">
       <p>Fireapp</p>
       <div className="container">
-        <label>Titulo</label>
+        <label>Atualize um post</label>
+        <input
+          type="text"
+          placeholder="Digite aqui o ID "
+          value={idPost}
+          onChange={(e) => {
+            setIdPost(e.target.value);
+          }}
+        />
+        <button className="btnSubmit" onClick={handleUpdate}>
+          Atualizar
+        </button>
+        <br />
 
+        <label>Titulo</label>
         <textarea
           placeholder="Digite aqui sua tarefa..."
           maxlength="30"
@@ -89,23 +142,20 @@ function App() {
             setTitulo(e.target.value);
           }}
         ></textarea>
-
         <label>Autor</label>
         <input
           type="text"
           placeholder="Digite o nome do autor"
           value={autor}
-          o
           onChange={(e) => {
             setAutor(e.target.value);
           }}
         />
-
         <button className="btnSubmit" onClick={handleAdd}>
           Enviar
         </button>
         <button className="btnSubmit" onClick={handleSearch}>
-          Buscar posts
+          Buscar todos posts
         </button>
 
         <div className="resultContainer">
@@ -113,9 +163,13 @@ function App() {
             {busca.map((item) => {
               return (
                 <li key={item.id}>
+                  <strong>ID: {item.id}</strong>
+                  <br />
                   <span>Titulo: {item.titulo} </span>
                   <br />
                   <span> Autor: {item.autor}</span>
+                  <br />
+                  <button onClick={() => handleDelete(item.id)}>Excluir</button>
                   <br />
                   <br />
                 </li>

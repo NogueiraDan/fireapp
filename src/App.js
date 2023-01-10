@@ -113,8 +113,11 @@ function App() {
             {busca.map((item) => {
               return (
                 <li key={item.id}>
-                  <span>Titulo: {item.titulo} </span> |
+                  <span>Titulo: {item.titulo} </span>
+                  <br />
                   <span> Autor: {item.autor}</span>
+                  <br />
+                  <br />
                 </li>
               );
             })}

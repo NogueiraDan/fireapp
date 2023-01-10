@@ -23,7 +23,7 @@ textarea {
   height: 40px;
 }
 
-.container #btnSubmit {
+.container .btnSubmit {
   height: 40px;
   width: 20%;
   border: none;
@@ -32,4 +32,10 @@ textarea {
   font-size: 14px;
   font-weight: bold;
   margin-top: 30px;
+}
+
+.resultContainer .result {
+  border: 1px solid black;
+  background-color: rgb(223, 255, 244);
+  color: black;
 }

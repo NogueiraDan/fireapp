@@ -91,20 +91,6 @@ function App() {
       })
       .catch((error) => alert("Erro! Campo invalido ou incorreto"));
   }
-  async function handleUpdate() {
-    const docRef = doc(db, "posts", idPost);
-    await updateDoc(docRef, {
-      titulo: titulo,
-      autor: autor,
-    })
-      .then(() => {
-        alert("atualizado");
-        setIdPost("");
-        setAutor("");
-        setTitulo("");
-      })
-      .catch((error) => alert("Erro! Campo invalido ou incorreto"));
-  }
 
   async function handleDelete(id) {
     const docRef = doc(db, "posts", id);

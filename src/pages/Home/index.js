@@ -1,17 +1,40 @@
-import { useState } from "react";
 import "./home.css";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../../database.config";
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 export default function Home() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [senha, setSenha] = useState();
 
-  function handleAcess() {
+  async function handleLogin(e) {
+    e.preventDefault();
     if (email !== "" && senha !== "") {
-      alert(`Email:${email} | Senha:${senha}`);
-      setEmail("");
-      setSenha("");
-    } else alert("Preencha todos os campos");
+      await signInWithEmailAndPassword(auth, email, senha)
+        .then(() => {
+          navigate("/admin", { replace: true });
+        })
+        .catch((err) => {
+          if (err.code == "auth/wrong-password") {
+            alert("Senha incorreta");
+          }
+          if (err.code == "auth/user-not-found") {
+            alert("Usuário não encontrado");
+          }
+          if (err.code == "auth/too-many-requests") {
+            alert(
+              "O acesso a esta conta foi temporariamente desativado devido a muitas tentativas de login malsucedidas. Por favor espere um momento, e tente novamente mais tarde."
+            );
+          }
+          console.log(err);
+        });
+    } else {
+    }
   }
 
   return (
@@ -37,7 +60,7 @@ export default function Home() {
           required
         />
 
-        <button id="btnSubmit" type="submit" onClick={handleAcess}>
+        <button id="btnSubmit" type="submit" onClick={handleLogin}>
           Acessar
         </button>
       </form>

@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /src/database.config.js
+/anotações.txt
 # testing
 /coverage
 

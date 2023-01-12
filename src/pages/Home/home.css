@@ -1,0 +1,102 @@
+.homeContainer {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+.homeContainer h1 {
+  font-size: 48px;
+}
+.homeContainer span {
+  font-size: 20px;
+}
+
+.homeContainer .form {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 100px 0 0 0;
+}
+
+.homeContainer input {
+  height: 45px;
+  width: 50%;
+  margin: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.homeContainer input::-webkit-input-placeholder {
+  padding-left: 10px;
+  opacity: 0.8;
+}
+
+.homeContainer button {
+  height: 45px;
+  width: 50%;
+  border-radius: 5px;
+  border: none;
+  background-color: #3366ff;
+  color: #fff;
+  font-size: 16px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.homeContainer .buttonRegister {
+  text-decoration: none;
+  color: #fff;
+  text-align: left;
+  font-size: 16px;
+}
+
+/* MEDIAS QUERIES - Breakpoints*/
+@media screen and (max-width: 768px) {
+  /* body {
+    background-color: red;
+  } */
+  .homeContainer h1 {
+    font-size: 30px;
+    margin: 0 5px 0 5px;
+    text-align: center;
+    line-height: 1;
+  }
+
+  .homeContainer h4 {
+    text-align: center;
+    font-size: 16px;
+    margin: 0px 5px 50px 5px;
+  }
+
+  .homeContainer .form {
+    width: 95%;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 5px;
+  }
+
+  .homeContainer input {
+    height: 45px;
+    width: 100%;
+    margin: 10px;
+    border-radius: 5px;
+    border: none;
+  }
+
+  .homeContainer button {
+    height: 45px;
+    width: 75%;
+    border-radius: 5px;
+    border: none;
+    background-color: #3366ff;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+}
+
+@media (min-width: 1024px) and (max-width: 1920px) {
+}

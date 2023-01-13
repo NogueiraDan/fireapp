@@ -1,5 +1,7 @@
 import "./home.css";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../database.config";
 import {
@@ -11,12 +13,19 @@ export default function Home() {
   const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [senha, setSenha] = useState();
+  const showToastMessage = () => {
+    toast.info("Logado com sucesso", {
+      position: toast.POSITION.TOP_LEFT,
+      autoClose: 3000,
+    });
+  };
 
   async function handleLogin(e) {
     e.preventDefault();
     if (email !== "" && senha !== "") {
       await signInWithEmailAndPassword(auth, email, senha)
         .then(() => {
+          showToastMessage();
           navigate("/admin", { replace: true });
         })
         .catch((err) => {

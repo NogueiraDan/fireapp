@@ -1,0 +1,80 @@
+.adminContainer {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+.adminContainer form {
+  margin-top: 20px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.adminContainer form textarea {
+  height: 80px;
+  width: 75%;
+  border-radius: 5px;
+  padding: 10px;
+}
+.adminContainer form .btnRegister {
+  margin: 15px 0 20px 0;
+  height: 35px;
+  width: 75%;
+  border-radius: 5px;
+  border: none;
+  background-color: #3366ff;
+  color: #fff;
+  font-size: 16px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.list {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(18, 18, 18, 0.5);
+  border-radius: 5px;
+  margin-bottom: 12px;
+  justify-content: center;
+  padding: 14px 8px;
+}
+.list p {
+  margin-bottom: 8px;
+}
+
+.list button {
+  margin-right: 5px;
+  border: 0;
+  border-radius: 5px;
+  padding: 8px;
+  width: auto;
+  text-align: center;
+  font-size: 14px;
+}
+
+.list .btnDone {
+  color: #ffcc23;
+  background: transparent;
+}
+
+.btnLogout {
+  position: absolute;
+  bottom: 6%;
+  left: 5%;
+  height: 60px;
+  width: 60px;
+  border: 0;
+  border-radius: 50%;
+  font-weight: bold;
+  background-color: rgba(219, 38, 41, 0.6);
+  color: #fff;
+  font-size: 15px;
+  transition: all 0.3s;
+}
+.btnLogout:hover {
+  background-color: rgba(219, 38, 41, 1);
+}

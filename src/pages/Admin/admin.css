@@ -59,6 +59,11 @@
 .list .btnDone {
   color: #ffcc23;
   background: transparent;
+  transition: all 1s;
+}
+
+.list .btnDone:hover {
+  border: 1px solid #ffcc23;
 }
 
 .btnLogout {

@@ -11,13 +11,14 @@ import {
   where,
   doc,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 
 export default function Admin() {
   const [tarefaInput, setTarefaInput] = useState();
   const [user, setUser] = useState({});
+  const [edit, setEdit] = useState({});
   const [tarefas, setTarefas] = useState([]);
-  console.log(tarefas);
 
   useEffect(() => {
     async function loadTarefas() {
@@ -59,13 +60,17 @@ export default function Admin() {
       alert("CAMPO VAZIO! Digite algo.");
       return;
     }
+
+    if (edit?.id) {
+      handleEditUpdate();
+      return;
+    }
     await addDoc(collection(db, "tarefas"), {
       tarefa: tarefaInput,
       createdAt: new Date(),
       UID: user?.uid,
     })
       .then(() => {
-        alert("Tarefa registrada");
         setTarefaInput("");
       })
       .catch((err) => {
@@ -82,6 +87,28 @@ export default function Admin() {
     await deleteDoc(docRef);
   }
 
+  async function handleEdit(item) {
+    console.log(item);
+    setTarefaInput(item.tarefa);
+    setEdit(item);
+  }
+  async function handleEditUpdate() {
+    const docRef = doc(db, "tarefas", edit?.id);
+    await updateDoc(docRef, {
+      tarefa: tarefaInput,
+    })
+      .then(() => {
+        console.log("Tarefa atualizada");
+        setTarefaInput("");
+        setEdit({});
+      })
+      .catch((err) => {
+        console.log(err);
+        setTarefaInput("");
+        setEdit({});
+      });
+  }
+
   return (
     <div className="adminContainer">
       <h1>Minhas tarefas</h1>
@@ -92,9 +119,19 @@ export default function Admin() {
           placeholder="Digite sua tarefa"
         />
 
-        <button type="submit" className="btnRegister" onClick={handleRegister}>
-          Registrar tarefa
-        </button>
+        {Object.keys(edit).length > 0 ? (
+          <button
+            type="submit"
+            className="btnRegister"
+            style={{ backgroundColor: "#2aa177" }}
+          >
+            Atualizar minha tarefa
+          </button>
+        ) : (
+          <button type="submit" className="btnRegister">
+            Registrar tarefa
+          </button>
+        )}
       </form>
 
       {tarefas.map((item) => {
@@ -102,7 +139,7 @@ export default function Admin() {
           <article key="item.id" className="list">
             <p>{item.tarefa}</p>
             <div>
-              <button>Editar</button>
+              <button onClick={() => handleEdit(item)}>Editar</button>
               <button className="btnDone" onClick={() => handleDelete(item.id)}>
                 Concluir
               </button>

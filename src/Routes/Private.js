@@ -15,7 +15,8 @@ export default function Private({ children }) {
     });
   };
 
-  useEffect(() => {
+  useEffect(() => {    
+    
     // Verificar se tem usuario Logado ou não
     async function checkLogin() {
       const unsub = onAuthStateChanged(auth, (user) => {

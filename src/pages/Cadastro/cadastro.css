@@ -24,6 +24,9 @@ h1 {
   margin: 10px;
   border-radius: 5px;
   border: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding-left: 10px;
 }
 .cadastroContainer button {
   height: 45px;

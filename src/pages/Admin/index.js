@@ -127,7 +127,7 @@ export default function Admin() {
         <textarea
           value={tarefaInput}
           onChange={(e) => setTarefaInput(e.target.value)}
-          placeholder="Digite sua tarefa"
+          placeholder="Digite sua tarefa..."
         />
 
         {Object.keys(edit).length > 0 ? (

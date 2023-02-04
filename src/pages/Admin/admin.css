@@ -19,6 +19,7 @@
   width: 75%;
   border-radius: 5px;
   padding: 10px;
+  font-size: 16px;
 }
 .adminContainer form .btnRegister {
   margin: 15px 0 20px 0;

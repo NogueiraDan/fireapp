@@ -1,4 +1,4 @@
-import { useState, useEffect, useInsertionEffect } from "react";
+import { useState, useEffect } from "react";
 import "./admin.css";
 import { auth, db } from "../../database.config";
 import { signOut } from "firebase/auth";
@@ -21,6 +21,7 @@ export default function Admin() {
   const [tarefas, setTarefas] = useState([]);
   const [email, setEmail] = useState();
 
+  
   useEffect(() => {
 
     async function loadTarefas() {
@@ -35,9 +36,7 @@ export default function Admin() {
           tarefasRef,
           orderBy("createdAt", "desc"),
           where("UID", "==", data?.uid)
-        );
-
-      
+        );     
 
         // Monitorando as tarefas em realtime
         const unsub = onSnapshot(q, (snapshot) => {
@@ -55,8 +54,6 @@ export default function Admin() {
         });
       }
     }
-
-  
     loadTarefas();
   
   }, []);
@@ -66,6 +63,7 @@ export default function Admin() {
     setEmail(user.email)
     console.log(email)
   },[])
+
 
   async function handleRegister(e) {
     e.preventDefault();
@@ -125,7 +123,7 @@ export default function Admin() {
   return (
     <div className="adminContainer">
       <h1>Minhas tarefas</h1>
-      <h2>Bem vindo: {(user.email)}</h2>  
+      <h2>Bem vindo, {(user.email)}</h2>  
       <form onSubmit={handleRegister}>
         <textarea
           value={tarefaInput}
@@ -147,6 +145,7 @@ export default function Admin() {
           </button>
         )}
       </form>
+      <h3>Tarefas pendentes {(tarefas.length)}</h3>
 
       {tarefas.map((item) => {
         return (

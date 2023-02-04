@@ -19,6 +19,7 @@ export default function Admin() {
   const [user, setUser] = useState({});
   const [edit, setEdit] = useState({});
   const [tarefas, setTarefas] = useState([]);
+  const [email, setEmail] = useState();
 
   useEffect(() => {
 
@@ -35,6 +36,8 @@ export default function Admin() {
           orderBy("createdAt", "desc"),
           where("UID", "==", data?.uid)
         );
+
+      
 
         // Monitorando as tarefas em realtime
         const unsub = onSnapshot(q, (snapshot) => {
@@ -53,8 +56,16 @@ export default function Admin() {
       }
     }
 
+  
     loadTarefas();
+  
   }, []);
+
+  useEffect(()=>{
+    const user = JSON.parse(localStorage.getItem('@detailUser'))
+    setEmail(user.email)
+    console.log(email)
+  },[])
 
   async function handleRegister(e) {
     e.preventDefault();
@@ -114,6 +125,7 @@ export default function Admin() {
   return (
     <div className="adminContainer">
       <h1>Minhas tarefas</h1>
+      <h2>Bem vindo: {(user.email)}</h2>  
       <form onSubmit={handleRegister}>
         <textarea
           value={tarefaInput}

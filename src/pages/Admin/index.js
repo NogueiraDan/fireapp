@@ -22,8 +22,8 @@ export default function Admin() {
   const [email, setEmail] = useState();
 
   
+  
   useEffect(() => {
-
     async function loadTarefas() {
       const userDetail = localStorage.getItem("@detailUser");
       setUser(JSON.parse(userDetail));
@@ -46,22 +46,21 @@ export default function Admin() {
               id: doc.id,
               tarefa: doc.data().tarefa,
               UID: doc.data().UID,
+              time: (doc.data().createdAt * 1000)
             });
           });
 
           setTarefas(lista);
-          console.log(lista);
+         
         });
       }
     }
     loadTarefas();
-  
   }, []);
 
   useEffect(()=>{
     const user = JSON.parse(localStorage.getItem('@detailUser'))
     setEmail(user.email)
-    console.log(email)
   },[])
 
 
@@ -145,12 +144,12 @@ export default function Admin() {
           </button>
         )}
       </form>
-      <h3>Tarefas pendentes {(tarefas.length)}</h3>
+      <h3>Tarefas pendentes: {(tarefas.length)}</h3>
 
       {tarefas.map((item) => {
         return (
           <article key="item.id" className="list">
-            <p>{item.tarefa}</p>
+            <p>{item.tarefa}</p>       
             <div>
               <button onClick={() => handleEdit(item)}>Editar</button>
               <button className="btnDone" onClick={() => handleDelete(item.id)}>

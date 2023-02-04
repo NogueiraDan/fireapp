@@ -22,7 +22,7 @@
 }
 .adminContainer form .btnRegister {
   margin: 15px 0 20px 0;
-  height: 35px;
+  height: 40px;
   width: 75%;
   border-radius: 5px;
   border: none;
@@ -82,4 +82,33 @@
 }
 .btnLogout:hover {
   background-color: rgba(219, 38, 41, 1);
+}
+
+
+@media (min-width: 200px) and (max-width: 1024px) {
+  .adminContainer form {
+    width: 100%;
+  }
+
+  .list {
+    width: 90%;
+    padding: 15px
+  }
+}
+
+
+@media (min-width: 1024px) and (max-width: 1920px) {
+  .adminContainer form {
+    width: 75%;
+  }
+
+  .adminContainer form .btnRegister{
+    width: 50%;
+   
+  }
+
+  .list {
+    width: 50%;
+    padding: 15px
+  }
 }

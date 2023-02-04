@@ -21,6 +21,7 @@ export default function Admin() {
   const [tarefas, setTarefas] = useState([]);
 
   useEffect(() => {
+
     async function loadTarefas() {
       const userDetail = localStorage.getItem("@detailUser");
       setUser(JSON.parse(userDetail));
@@ -34,6 +35,7 @@ export default function Admin() {
           orderBy("createdAt", "desc"),
           where("UID", "==", data?.uid)
         );
+
         // Monitorando as tarefas em realtime
         const unsub = onSnapshot(q, (snapshot) => {
           let lista = [];
@@ -57,7 +59,7 @@ export default function Admin() {
   async function handleRegister(e) {
     e.preventDefault();
     if (!tarefaInput) {
-      alert("CAMPO VAZIO! Digite algo.");
+      alert("CAMPO VAZIO! Preencha algo para prosseguir.");
       return;
     }
 

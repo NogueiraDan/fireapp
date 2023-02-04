@@ -68,17 +68,17 @@
 }
 
 .btnLogout {
-  position: absolute;
+  position: fixed;
   bottom: 6%;
-  left: 5%;
-  height: 60px;
-  width: 60px;
+  right: 5%;
+  height: 70px;
+  width: 70px;
   border: 0;
   border-radius: 50%;
   font-weight: bold;
   background-color: rgba(219, 38, 41, 0.6);
   color: #fff;
-  font-size: 15px;
+  font-size: 16px;
   transition: all 0.3s;
 }
 .btnLogout:hover {

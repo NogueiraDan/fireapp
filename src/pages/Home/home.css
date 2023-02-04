@@ -11,6 +11,7 @@
 }
 .homeContainer span {
   font-size: 20px;
+  text-align: center;
 }
 
 .homeContainer .form {
@@ -95,6 +96,8 @@
     border: none;
     background-color: #3366ff;
   }
+
+  
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {

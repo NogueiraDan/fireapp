@@ -21,8 +21,6 @@ export default function Admin() {
   const [tarefas, setTarefas] = useState([]);
   const [email, setEmail] = useState();
 
-  
-  
   useEffect(() => {
     async function loadTarefas() {
       const userDetail = localStorage.getItem("@detailUser");
@@ -36,7 +34,7 @@ export default function Admin() {
           tarefasRef,
           orderBy("createdAt", "desc"),
           where("UID", "==", data?.uid)
-        );     
+        );
 
         // Monitorando as tarefas em realtime
         const unsub = onSnapshot(q, (snapshot) => {
@@ -46,23 +44,21 @@ export default function Admin() {
               id: doc.id,
               tarefa: doc.data().tarefa,
               UID: doc.data().UID,
-              time: (doc.data().createdAt * 1000)
+              time: doc.data().createdAt * 1000,
             });
           });
 
           setTarefas(lista);
-         
         });
       }
     }
     loadTarefas();
   }, []);
 
-  useEffect(()=>{
-    const user = JSON.parse(localStorage.getItem('@detailUser'))
-    setEmail(user.email)
-  },[])
-
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("@detailUser"));
+    setEmail(user.email);
+  }, []);
 
   async function handleRegister(e) {
     e.preventDefault();
@@ -122,7 +118,7 @@ export default function Admin() {
   return (
     <div className="adminContainer">
       <h1>Minhas tarefas</h1>
-      <h2>Bem vindo, {(user.email)}</h2>  
+      <h2>Bem vindo, {user.email}</h2>
       <form onSubmit={handleRegister}>
         <textarea
           value={tarefaInput}
@@ -144,7 +140,7 @@ export default function Admin() {
           </button>
         )}
       </form>
-      <h3>Tarefas pendentes: {(tarefas.length)}</h3>
+      <h3>Tarefas pendentes: {tarefas.length}</h3>
 
       {tarefas.map((item) => {
         return (
@@ -159,6 +155,34 @@ export default function Admin() {
           </article>
         );
       })}
+
+      {/* <div className="tasks_container">
+        <div id="todo" className="todo_container">
+          <span className="title_tasks">Para fazer</span>
+          {tarefas.map((item) => {
+            return (
+              <article key="item.id" className="list" draggable="true">
+                <p>{item.tarefa}</p>
+                <div>
+                  <button onClick={() => handleEdit(item)}>Editar</button>
+                  <button
+                    className="btnDone"
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    Concluir
+                  </button>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+        <div id="progress" className="progress_container">
+          <span className="title_tasks">Em andamento</span>
+        </div>
+        <div id="done" className="done_container">
+          <span className="title_tasks">Concluídas</span>
+        </div>
+      </div> */}
 
       <button className="btnLogout" onClick={handleLogout}>
         Sair

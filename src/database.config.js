@@ -6,7 +6,7 @@ import { getAuth } from 'firebase/auth'
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: "learning-4c6d7.firebaseapp.com",
-  projectId: "learning-4c6d7",
+  projectId: process.env.REACT_APP_PROJECT_ID,
   storageBucket: "learning-4c6d7.appspot.com",
   messagingSenderId: "575871063087",
   appId: "1:575871063087:web:83b471a4b4bddd742122da",
